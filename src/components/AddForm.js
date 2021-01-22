@@ -1,25 +1,45 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { getSmurfData }  from '../actions'
 
-class AddForm extends React.Component {
+const  AddForm = ({smurfData, error, isFetching }) => {
 
-    render() {
+
+    const handleClick = (e) =>{
+        e.preventDefault();
+        console.log("dataTest------------",getSmurfData())
+        getSmurfData();
+    }
+    if (error) {
+        return <h2>We got an error: {error}</h2>;
+      }
+    
+      if (isFetching) {
+        return <h2>Fetching quote for ya!</h2>;
+      }
+
         return(<section>
             <h2>Add Smurf</h2>
             <form>
                 <div className="form-group">
                     <label htmlFor="name">Name:</label><br/>
-                    <input onChange={this.handleChange} name="name" id="name" />
+                    <input onChange={handleClick} name="name" id="name" />
                 </div>
 
                 <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: </div>
-                <button>Submit Smurf</button>
+                <button onClick={handleClick}>Submit Smurf</button>
             </form>
         </section>);
-    }
 }
+const mapStateToProps = state => {
+    return {
+      smurfData: state.quote,
+      isFetching: state.isFetching,
+      error: state.error
+    };
+  };
 
-export default AddForm;
-
+  export default connect(mapStateToProps, { getSmurfData })(AddForm);
 //Task List:
 //1. Add in all necessary import components and library methods.
 //2. Connect all needed redux state props and action functions to the component before exporting.
