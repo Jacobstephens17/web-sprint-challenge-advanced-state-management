@@ -1,5 +1,27 @@
 import axios from 'axios';
 
+export const GET_SMURF_START = "GET_SMURF_START";
+export const GET_SMURF_SUCCESS = "GET_SMURF_SUCCESS";
+export const GET_SMURF_FAIL = "GET_SMURF_FAIL";
+
+
+
+export const getSmurfData = () => dispatch => {
+    dispatch({ type: GET_SMURF_START });
+    axios 
+        .get('http://localhost:3333/smurfs')
+        .then((res) => {
+            dispatch({type:GET_SMURF_SUCCESS, payload:res})
+            console.log("Test", res)
+        })
+        .catch((err) => {
+            console.log(err)
+            dispatch({ type:GET_SMURF_FAIL, payload: err});
+        })
+}
+
+
+
 //Task List:
 //1. Add fetch smurfs action: 
 //              - fetch and return initial list of smurfs
