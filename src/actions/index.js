@@ -6,17 +6,15 @@ export const GET_SMURF_FAIL = "GET_SMURF_FAIL";
 
 
 
-export const getSmurfData = () => dispatch => {
-    dispatch({ type: GET_SMURF_START });
+export const getSmurfData = () => {
+    // dispatch({ type: GET_SMURF_START });
     axios 
         .get('http://localhost:3333/smurfs')
         .then((res) => {
-            dispatch({type:GET_SMURF_SUCCESS, payload:res})
-            console.log("Test", res)
+            // console.log("Test", res.data)
         })
         .catch((err) => {
             console.log(err)
-            dispatch({ type:GET_SMURF_FAIL, payload: err});
         })
 }
 
