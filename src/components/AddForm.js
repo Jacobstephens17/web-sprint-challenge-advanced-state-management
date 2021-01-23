@@ -1,17 +1,16 @@
 import React from 'react';
 import { postSmurf } from "../actions/";
 import { connect } from 'react-redux';
-class AddForm extends React.Component {
-    // useEffect(() => {
-    //     postSmurf();
-    //   }, []);
 
-        state = {
-            name: "",
-            position: "",
-            nickname:"",
-            description: ""
-        }
+
+
+class AddForm extends React.Component {
+    state = {
+        name: "",
+        position: "",
+        nickname:"",
+        description: ""
+    }
     
 
     handleChange = (e) => {

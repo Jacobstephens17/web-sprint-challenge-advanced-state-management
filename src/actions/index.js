@@ -19,15 +19,10 @@ export const getSmurfData = (smurfData) => {
         axios 
             .get('http://localhost:3333/smurfs')
             .then((res) => {
-                // console.log("Test", res.data)
-                // const smurfData = res.data.forEach(item=>{
-                //     console.log(item)
-                // })
-                
                 dispatch({ type: GET_SMURF_SUCCESS, payload: smurfData.res.data})
             })
             .catch((err) => {
-                dispatch({ type: GET_SMURF_FAIL, payload:err.message})
+                dispatch({ type: GET_SMURF_FAIL, payload:err.message.data})
 
                 console.log(err)
             })
