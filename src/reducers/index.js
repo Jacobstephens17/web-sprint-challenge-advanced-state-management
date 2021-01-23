@@ -1,20 +1,26 @@
-import { GET_SMURF_START, GET_SMURF_SUCCESS, GET_SMURF_FAIL } from '../actions';
+import { 
+        GET_SMURF_START,
+        GET_SMURF_SUCCESS, 
+        GET_SMURF_FAIL, 
+        POST_SMURF_START, 
+        POST_SMURF_SUCCESS, 
+        POST_SMURF_FAIL } from '../actions';
 
 
 export const initialState = {
- isLoading: false, 
- smurfData: [], 
- error: '',
+    smurfs:[],
+    isLoading: false, 
+    isPosting:false,
+    error: '',
 };
 
 
-const reducer = (state = initialState, action)=>{
+export const reducer = (state = initialState, action)=>{
     switch(action.type){
             case (GET_SMURF_START):
                 return({
                     ...state,
                     isLoading:true, 
-                    smurfData:[],
                     error:'',
                 })
             case (GET_SMURF_SUCCESS):
@@ -22,7 +28,6 @@ const reducer = (state = initialState, action)=>{
                     ...state,
                     isLoading:false,
                     smurfData:action.payload,
-                    error:''
                 })
             case (GET_SMURF_FAIL):
                 return({
@@ -30,6 +35,24 @@ const reducer = (state = initialState, action)=>{
                     isLoading:false, 
                     error:action.payload
                 })
+            case(POST_SMURF_START):
+                return({
+                ...state,
+                isPosting: true,
+                error:''
+            })
+            case(POST_SMURF_SUCCESS):
+                return({
+                ...state,
+                smurfs: [...action.payload],
+                isPosting: false,
+            })
+            case(POST_SMURF_FAIL):
+                return({
+                ...state,
+                isPosting: false,
+                error: 'Post Failed'
+            })
             default:
                 return state;
     }
